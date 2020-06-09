@@ -1,8 +1,14 @@
 #Librerias necesarias
 '''
-conda install -c conda-forge opencv
+Python version > 3.XX
+Conda installed with path variables activated (miniconda can be installed too)
+For the correct execution of the script create a new environment
+install openCV using:
+    conda install -c conda-forge opencv
+install scikit learn with the version 0.22.1 to prevent any waring or malfunction
 scikit=0.22.1
-numpy=1.18.1
+numpy could be any version however the one -i used was
+    numpy=1.18.1
 '''
 import cv2
 import numpy as np
