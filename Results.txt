@@ -1,0 +1,115 @@
+Results on variouos processes and clases balance among the Datasets
+
+CK+48 is the widest Dataset and at the same time the most unbalanced between the classes
+it does not include neutral expresion, the number of samples included are:
+	Surprise:	249
+	Happy		207
+	Anger		135
+	Sad			84
+	Neutral		0
+
+Faces DB is a fully balanced Dataset, it contains the same number of samples for each individual
+it includes more facial emotions and even side views for all the faces, it was originally created
+for CGI
+	Surprise:	36
+	Happy		36
+	Anger		36
+	Sad			36
+	Neutral		36
+
+A private Dataset was also used, it was created with the contribution from friends and relatives
+such Dataset is fully balanced among the classes
+	Surprise:	38
+	Happy		38
+	Anger		38
+	Sad			38
+	Neutral		38
+
+NOTE:
+Neutral expresion is not considered an emotion in this context, is mainly used as a pivot,
+so when the script is executed in real time, the person being evaluated can shift between the
+emotions to predict
+
+*****************************************************************************************
+Results with original Datasets and non balanced classes:
+(65, 'LogisticRegression', 0.863768115942029, 46)
+
+First value means best random_state found for function train_test_split()
+Second value means predictor used from sklearn
+Third value means precision score obtained
+Fourth value means best random_state found for the training (fit()) of the model
+
+Surprise    323
+Happy       281
+Anger       209
+Sad         158
+Neutral      74
+
+----------------------------------------------------------------------------------------
+Results with clases balanced according to the samples for the "Sad" expression
+(76, 'LogisticRegression', 0.7424892703862661, 4)
+
+Anger       158
+Surprise    158
+Sad         158
+Happy       158
+Neutral      74
+
+----------------------------------------------------------------------------------------
+Results with the Datasets: Faces DB and the private Dataset, ignoring the CK+48 Dataset
+to discard the unbalance, the inherent repetition in the samples and the absence of the
+neutral expression in such Dataset
+(98, 'LogisticRegression', 0.5121951219512195, 12)
+
+Anger       74
+Surprise    74
+Happy       74
+Neutral     74
+Sad         74
+
+----------------------------------------------------------------------------------------
+Results with the complete balance of all the Datasets, it was done with the resample() function
+of sklearn using random_state=42
+(10, 'LogisticRegression', 0.9606003752345216, 60)
+
+The precision increment is remarkable, overcoming 95%, however in this particular case a phenomenon
+called Overfitting is present, it means that the model is memorizing the features from the Datasets
+and it will be more difficult to correctly predict new samples that not belong to the original Datasets
+
+In the present model, such Overfitting tends to the emotions from ck+48 Dataset, experimentally it
+was found that the model did predict very efficiently the samples in CK+48, however when used to
+predict fully alien individuals the precision rate lowered down, specifically between the "Sad" and
+"Anger" emotions and the neutral expression, confusing them with each other.
+
+Sad         323
+Neutral     323
+Anger       323
+Surprise    323
+Happy       323
+
+CONCLUSIONS:
+It is possible for a computer through Machine Learning algorithms to predict human beings
+basic emotions
+
+The importance of the quantity/quality relationship in all the data used to train the algorithm
+is crucial and will determine teh effectiveness in each used mathematical model
+
+The precision score obtained, will not always be the best indicator of a predictor's efficiency,
+this is because as we see during the full classes balance it is possible to have an Overfitting that
+will affect the real perfomance of the model
+
+NOTE:
+Two mathematical models are included in .sav format
+modelo_Reco_Facial_LogReg.sav, this model is based on the first results shown
+from the non balanced classes with the score = 0.863768 and,
+modelo_Reco_Facial_LogReg_Over.sav this model is based on the results shown
+from the fully balanced classes with the score = 0.960600
+to switch between them it is just needed to change the comment line
+
+
+Enrique Ramos García
+
+For any questions or clarification about the execution, development or information from the present
+proyect contact to:
+
+gilgamesh_0@hotmail.com

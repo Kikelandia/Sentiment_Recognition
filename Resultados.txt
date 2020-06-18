@@ -1,0 +1,118 @@
+Resultados en varios procesos y balanceo de clases en los Datasets
+
+CK+48 es el Dataset más amplio y de igual manera es el que contiene mas desbalance entre las
+clases y a su vez no incluye la expresión neutral, el número de muestras que incluye son:
+	Surprise:	249
+	Happy		207
+	Anger		135
+	Sad			84
+	Neutral		0
+
+Faces DB es un Dataset completamente balanceado contiene el mismo número de muestras para cada
+individuo de igual manera incluye más expresiones e incluso vistas laterales de los rostros, fue
+creado originalmente para animación por computadora
+	Surprise:	36
+	Happy		36
+	Anger		36
+	Sad			36
+	Neutral		36
+
+También fue utilizada una base de datos privada, que fue creada con la aportación de imagenes
+de amigos y personas cercanas, dicho dataset está completamente balanceado en todas las clases
+	Surprise:	38
+	Happy		38
+	Anger		38
+	Sad			38
+	Neutral		38
+
+NOTA:
+La expresión neutral no es considerada una emoción en éste contexto, es utilizada principalmente
+como pivote, así cuando el script se ejecuta en tiempo real la persona que está siendo evaluada
+pueda cambiar entre las emociones a predecir
+
+*****************************************************************************************
+Resultados con todos los Datasets y las clases sin balancear:
+(65, 'LogisticRegression', 0.863768115942029, 46)
+
+El primer valor representa el mejor random_state encontrado para la funcion train_test_split()
+El segundo valor representa el predictor usado de la libreria Sklearn
+El tercer valor representa el puntaje de precisión obtenido
+El cuarto valor representa el mejor random_state encontrado para el entrenamiento (fit()) del modelo
+
+Surprise    323
+Happy       281
+Anger       209
+Sad         158
+Neutral      74
+
+----------------------------------------------------------------------------------------
+Resultados con los Datasets teniendo las clases balanceadas según las muestras de la emoción "Sad"
+(76, 'LogisticRegression', 0.7424892703862661, 4)
+
+Anger       158
+Surprise    158
+Sad         158
+Happy       158
+Neutral      74
+
+----------------------------------------------------------------------------------------
+Resultados con los Datasets FacesDB y el Dataset privado, ignorando así el dataset CK+48,
+para descartar el desbalanceo, la repetición inherente de muestras y la ausencia
+de la expresión neutral en dicho DataSet
+(98, 'LogisticRegression', 0.5121951219512195, 12)
+
+Anger       74
+Surprise    74
+Happy       74
+Neutral     74
+Sad         74
+
+----------------------------------------------------------------------------------------
+Resultados con el balanceo completo de todos los DataSets, fue realizado con la función resample()
+de skLearn y random_state=42
+(10, 'LogisticRegression', 0.9606003752345216, 60)
+
+Es notable el incremento de la presición superando el 95% sin embargo en éste caso particular
+se presenta un fenomeno llamado "Overfitting" (Sobreajuste) el cual significa que el modelo está
+memorizando las características de los Datasets y le será más difícil predecir correctamente las muestras
+de nuevos individuos que no pertenezcan a los Datasets utilizados, durante el entrenamiento.
+
+En el modelo presente, dicho Sobreajuste tiende hacia las emociones del DataSet CK+48, experimentalmente
+se encontró que el modelo predecía muy eficientemente las muestras de CK+48, sin embargo al utilizarlo
+para predecir individuos completamente ajenos la proporción de precisión descendía, especificamente
+entre las emociones "Sad", "Anger" y la expresión Neutral, confundiendolas entre sí.
+
+Sad         323
+Neutral     323
+Anger       323
+Surprise    323
+Happy       323
+
+
+CONCLUSIONES:
+Sí es posible mediante algoritmos de "Machine Learning" que una computadora logre predecir las emociones
+básicas de un ser humano.
+
+La importancia de la relación calidad-cantidad en los datos con los que se realizará el entrenamiento
+es crucial y determinará la efectividad de cada modelo matemático usado.
+
+El puntaje de precisión obtenido, no siempré será el mejor indicador de la eficiencia de un predictor,
+esto se debe a que, como vimos durante el balanceo de clases es posible tener un Sobreajuste que afectará
+el desempeño real del modelo
+
+NOTA:
+Son incluidos dos modelos matemáticos en formato .sav
+modelo_Reco_Facial_LogReg.sav, este modelo está basado en los primeros resultados mostrados,
+con las clases sin balancear con el puntaje igual a 0.863768 y,
+modelo_Reco_Facial_LogReg_Over, este modelo está basado en los resultados mostrados,
+con las clases completamente balanceadas con el puntaje igual a 0.960600
+Solo es necesario cambiar la posición del comentario en el archivo Reco_Camara.py entre ellos para
+ejecutar la predicción con cada uno.
+
+
+Enrique Ramos García
+
+Para cualquier duda o aclaración sobre la información, ejecución o desarrollo del presente trabajo
+contactar al correo:
+
+gilgamesh_0@hotmail.com
