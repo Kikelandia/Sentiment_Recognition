@@ -98,5 +98,5 @@ cap.release()
 #out.release()
 cv2.destroyAllWindows()
 
-#Para guardar el video en discon simplemente descomentar las líneas 40,41,89,98
+#Para guardar el video en disco simplemente descomentar las líneas 40,41,89,98
 #To save video in disk simply uncomment lines 40,41,89,98
