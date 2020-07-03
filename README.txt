@@ -30,9 +30,9 @@ execution of this script, otherwise the recommended steps are listed:
 01.- Download and extract (in the desktop *optional) the file Sentiment_Recognition.zip
 02.- Download and install python 3.xx with the file you can find in "https://www.python.org/downloads/"
 03.- Download and install miniconda with the file you can find in "https://docs.conda.io/en/latest/miniconda.html"
-		VERY IMPORTANT during the installation enable environment variables
-			in the step three or four of the installation the wizard will ask if you want to enable such variables
-			it is needed to activate them
+	VERY IMPORTANT during the installation enable environment variables
+		in the step three or four of the installation the wizard will ask if you want to enable such variables
+		it is needed to activate them
 04.- Once the installations are done open a terminal
 		Windows: search for the cmd
 		Lynuc ctrl + alt + t
